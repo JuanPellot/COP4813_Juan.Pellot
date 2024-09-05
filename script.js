@@ -14,7 +14,7 @@ function displayWelcomeMessage() {
 function updateFooterDate() {
     const footer = document.querySelector('footer p');
     const currentYear = new Date().getFullYear();
-    footer.textContent = `© ${currentYear} Your Name - COP4813 Web Development`;
+    footer.textContent = `© ${currentYear} Juan Pellot - COP4813 Web Development`;
 }
 
 // Function to add smooth scrolling effect to menu links
@@ -36,9 +36,4 @@ function addSmoothScrolling() {
             }
         });
     });
-}
-
-// Example function to demonstrate potential future JavaScript additions
-function exampleFeature() {
-    alert('This is a placeholder for a future interactive feature!');
 }
