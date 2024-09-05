@@ -75,6 +75,28 @@ nav {
     display: block;
 }
 
+/* Scrollable Dropdown Menu for Assignments */
+.menu li ul.assignments {
+    max-height: 200px; /* Adjust height to fit the needs */
+    overflow-y: auto; /* Enables vertical scrolling */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #575757 #333; /* For Firefox */
+}
+
+/* Custom Scrollbar Styles for WebKit (Chrome, Safari) */
+.menu li ul.assignments::-webkit-scrollbar {
+    width: 8px;
+}
+
+.menu li ul.assignments::-webkit-scrollbar-thumb {
+    background-color: #575757;
+    border-radius: 4px;
+}
+
+.menu li ul.assignments::-webkit-scrollbar-track {
+    background: #333;
+}
+
 .menu li ul li a {
     padding: 10px 20px;
     transition: background-color 0.3s;
