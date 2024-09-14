@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Form</title>
+    <link rel="stylesheet" href="stylea3.css">
+    <script src="scripta3.js" defer></script> 
+</head>
+<body>
+    <div class="form-container">
+        <h1>User Information Form</h1>
+        <form name="userForm" onsubmit="return validateForm()" action="mailto:your-email@example.com" method="post" enctype="text/plain">
+            <!-- Full Name -->
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" placeholder="First Last" required><br><br>
+
+            <!-- Address -->
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" placeholder="Street, City, State, Zip" required><br><br>
+
+            <!-- Phone Number -->
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" placeholder="1234567890" required><br><br>
+
+            <!-- Email Address -->
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" placeholder="name@domain.com" required><br><br>
+
+            <!-- Birth Date -->
+            <label for="birthdate">Birth Date:</label>
+            <input type="date" id="birthdate" name="birthdate" required><br><br>
+
+            <!-- Message -->
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="4" cols="50" placeholder="Enter your message..." required></textarea><br><br>
+
+            <!-- CAPTCHA/Security Question -->
+            <label for="captcha">Security Question: What is the last name of the current president?</label>
+            <input type="text" id="captcha" name="captcha" required><br><br>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
