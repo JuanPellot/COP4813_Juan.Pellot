@@ -1,0 +1,51 @@
+<form id="dragForm">
+    <label>Drag Coefficient (Cd):</label>
+    <input type="number" id="Cd" value="0.5" step="0.01"><br>
+    <label>Fluid Density (ρ):</label>
+    <input type="number" id="rho" value="1.225" step="0.001"><br>
+    <label>Cross-sectional Area (A):</label>
+    <input type="number" id="A" value="1" step="0.01"><br>
+    <label>Velocity Range (min - max):</label>
+    <input type="number" id="vMin" value="0" step="1">
+    <input type="number" id="vMax" value="100" step="1"><br>
+    <button type="button" onclick="plotDragForce()">Plot Drag Force</button>
+</form>
+<div id="plot"></div>
+
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    function plotDragForce() {
+        const Cd = parseFloat(document.getElementById("Cd").value);
+        const rho = parseFloat(document.getElementById("rho").value);
+        const A = parseFloat(document.getElementById("A").value);
+        const vMin = parseFloat(document.getElementById("vMin").value);
+        const vMax = parseFloat(document.getElementById("vMax").value);
+
+        const velocities = [];
+        const dragForces = [];
+        
+        for (let v = vMin; v <= vMax; v++) {
+            velocities.push(v);
+            dragForces.push(calculateDragForce(Cd, rho, A, v));
+        }
+
+        const trace = {
+            x: velocities,
+            y: dragForces,
+            type: 'scatter'
+        };
+
+        const layout = {
+            title: 'Drag Force vs Velocity',
+            xaxis: { title: 'Velocity (m/s)' },
+            yaxis: { title: 'Drag Force (N)' }
+        };
+
+        Plotly.newPlot('plot', [trace], layout);
+    }
+
+    function calculateDragForce(Cd, rho, A, v) {
+        return 0.5 * Cd * rho * A * Math.pow(v, 2);
+    }
+</script>
