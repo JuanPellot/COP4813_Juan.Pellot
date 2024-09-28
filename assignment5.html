@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spirograph</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Spirograph</h1>
+    <div class="controls">
+        <label for="R">Outer Circle Radius (R): </label>
+        <input type="number" id="R" value="150" min="50" max="300"><br>
+        
+        <label for="r">Inner Circle Radius (r): </label>
+        <input type="number" id="r" value="60" min="20" max="100"><br>
+        
+        <label for="O">Offset (O): </label>
+        <input type="number" id="O" value="20" min="5" max="50"><br><br>
+        
+        <button onclick="startSpirograph()">Start Drawing</button>
+    </div>
+
+    <canvas id="spiroCanvas" width="600" height="600"></canvas>
+
+    <script>
+        function startSpirograph() {
+            const canvas = document.getElementById("spiroCanvas");
+            const ctx = canvas.getContext("2d");
+
+            
+            const R = parseFloat(document.getElementById("R").value);
+            const r = parseFloat(document.getElementById("r").value);
+            const O = parseFloat(document.getElementById("O").value);
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+            ctx.strokeStyle = "blue"; 
+            ctx.lineWidth = 1;
+
+            let t = 0; 
+            const centerX = canvas.width / 2; 
+            const centerY = canvas.height / 2; 
+
+            function draw() {
+                t += 0.01; 
+
+                const x = (R + r) * Math.cos(t) - (r + O) * Math.cos(((R + r) / r) * t);
+                const y = (R + r) * Math.sin(t) - (r + O) * Math.sin(((R + r) / r) * t);
+
+                
+                ctx.beginPath();
+                ctx.arc(centerX + x, centerY + y, 1, 0, 2 * Math.PI);
+                ctx.fillStyle = "blue";
+                ctx.fill();
+
+                if (t < 2 * Math.PI * r / gcd(R, r)) {
+                    requestAnimationFrame(draw);
+                }
+            }
+
+            
+            function gcd(a, b) {
+                if (!b) {
+                    return a;
+                }
+                return gcd(b, a % b);
+            }
+
+            
+            requestAnimationFrame(draw);
+        }
+    </script>
+</body>
+</html>
