@@ -1,18 +1,39 @@
 {
   "players": [
     {
-      "playerName": "John Doe",
-      "position": "Forward",
+      "playerName": "Brock Purdy",
+      "position": "QuarterBack",
       "season": "2023-2024",
-      "gamesPlayed": 82,
-      "pointsPerGame": 24.5
+      "gamesPlayed": 16,
+      "touchdowns": 13
     },
     {
-      "playerName": "Jane Smith",
-      "position": "Guard",
+      "playerName": "Jonathan Taylor",
+      "position": "RunningBack",
       "season": "2023-2024",
-      "gamesPlayed": 80,
-      "pointsPerGame": 19.3
+      "gamesPlayed": 10,
+      "touchdowns": 7
+    }
+    {
+      "playerName": "Derrick Henry",
+      "position": "RunningBack",
+      "season": "2023-2024",
+      "gamesPlayed": 17,
+      "touchdowns": 12
+    }
+     {
+      "playerName": "Nico Collins",
+      "position": "WideReciver",
+      "season": "2023-2024",
+      "gamesPlayed": 15,
+      "touchdowns": 8
+    }
+     {
+      "playerName": "Justin Jefferson",
+      "position": "WideReciver",
+      "season": "2023-2024",
+      "gamesPlayed": 17,
+      "touchdowns": 5
     }
   ]
 }
