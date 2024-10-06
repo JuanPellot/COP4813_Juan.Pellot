@@ -1,0 +1,18 @@
+{
+  "players": [
+    {
+      "playerName": "John Doe",
+      "position": "Forward",
+      "season": "2023-2024",
+      "gamesPlayed": 82,
+      "pointsPerGame": 24.5
+    },
+    {
+      "playerName": "Jane Smith",
+      "position": "Guard",
+      "season": "2023-2024",
+      "gamesPlayed": 80,
+      "pointsPerGame": 19.3
+    }
+  ]
+}

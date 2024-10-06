@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Stats</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<h1>Player Stats</h1>
+
+<table border="1" id="playerTable">
+    <thead>
+        <tr>
+            <th>Player Name</th>
+            <th>Position</th>
+            <th>Season</th>
+            <th>Games Played</th>
+            <th>Points Per Game</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function(){
+        $.getJSON("data.json", function(data) {
+            var players = data.players;
+            var tableBody = '';
+            $.each(players, function(index, player) {
+                tableBody += '<tr>';
+                tableBody += '<td>' + player.playerName + '</td>';
+                tableBody += '<td>' + player.position + '</td>';
+                tableBody += '<td>' + player.season + '</td>';
+                tableBody += '<td>' + player.gamesPlayed + '</td>';
+                tableBody += '<td>' + player.pointsPerGame + '</td>';
+                tableBody += '</tr>';
+            });
+            $('#playerTable tbody').append(tableBody);
+        });
+    });
+</script>
+
+</body>
+</html>
