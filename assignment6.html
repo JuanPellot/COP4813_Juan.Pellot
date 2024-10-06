@@ -61,7 +61,7 @@
             <th>Position</th>
             <th>Season</th>
             <th>Games Played</th>
-            <th>Points Per Game</th>
+            <th>Touchdowns</th>
         </tr>
     </thead>
     <tbody>
@@ -79,7 +79,7 @@
                 tableBody += '<td>' + player.position + '</td>';
                 tableBody += '<td>' + player.season + '</td>';
                 tableBody += '<td>' + player.gamesPlayed + '</td>';
-                tableBody += '<td>' + player.pointsPerGame + '</td>';
+                tableBody += '<td>' + player.touchdowns + '</td>';
                 tableBody += '</tr>';
             });
             $('#playerTable tbody').append(tableBody);
