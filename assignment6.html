@@ -5,12 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Player Stats</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Light blue background */
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #0277bd; /* Dark blue for the heading */
+        }
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        table, th, td {
+            border: 1px solid #90caf9; /* Light blue border */
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #0288d1; /* Blue header background */
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #b3e5fc; /* Light blue for even rows */
+        }
+        tr:hover {
+            background-color: #81d4fa; /* Medium blue for hover effect */
+        }
+        @media (max-width: 600px) {
+            table {
+                width: 100%;
+            }
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <h1>Player Stats</h1>
 
-<table border="1" id="playerTable">
+<table id="playerTable">
     <thead>
         <tr>
             <th>Player Name</th>
