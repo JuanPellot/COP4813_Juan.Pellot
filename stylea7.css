@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #01579b;
+    margin: 20px;
+}
+
+#dealButton {
+    background-color: #0288d1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#dealButton:hover {
+    background-color: #0277bd;
+}
+
+#cardArea {
+    width: 600px;
+    height: 400px;
+    border: 2px solid #0277bd;
+    margin: 20px auto;
+    background-color: #b3e5fc;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#discardPile {
+    width: 150px;
+    height: 200px;
+    border: 3px dashed #01579b;
+    margin: 20px auto;
+    background-color: #e1f5fe;
+    color: #01579b;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    width: 72px;
+    height: 96px;
+    position: absolute;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
