@@ -24,7 +24,7 @@ $(document).ready(function () {
 
         shuffledCards.slice(0, 5).forEach((card, index) => {
             const cardElement = $('<img>')
-                .attr('src', `cards/${card}.jpg`)
+                .attr('src', `cards/${card}.jpg`)  // This is where the folder name is used
                 .addClass('card')
                 .css({ top: `${index * 20}px`, left: `${index * 80}px` })
                 .draggable();
