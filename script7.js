@@ -1,64 +1,43 @@
-$(document).ready(function() {
-    const cardDeck = [];
-    const suits = ['S', 'H', 'D', 'C']; // Spades, Hearts, Diamonds, Clubs
-    
-    // Initialize card deck
+$(document).ready(function () {
+    const suits = ['S', 'C', 'H', 'D'];  // Spades, Clubs, Hearts, Diamonds
+    const cards = [];
+
+    // Create a deck of 52 cards
     suits.forEach(suit => {
         for (let i = 1; i <= 13; i++) {
-            cardDeck.push(`${suit}${i}.jpg`);
+            cards.push(`${suit}${i}`);
         }
     });
 
-    // Function to shuffle cards
-    function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
+    function shuffleDeck(deck) {
+        for (let i = deck.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
+            [deck[i], deck[j]] = [deck[j], deck[i]];
         }
+        return deck;
     }
 
-    // Function to deal cards
-    function dealCards() {
-        shuffle(cardDeck);
-        $('#deck').empty(); // Clear previous cards
-        
-        cardDeck.forEach((card, index) => {
-            const cardElement = $('<img>', {
-                src: `cards/${card}`,
-                class: 'card',
-                css: {
-                    top: `${index * 5}px`,
-                    left: `${index * 5}px`
-                },
-                draggable: true
-            });
+    // Deal cards when button is clicked
+    $('#dealButton').on('click', function () {
+        const shuffledCards = shuffleDeck([...cards]);
+        $('#cardArea').empty();  // Clear previous cards
 
-            // Attach drag event
-            cardElement.on('dragstart', function(event) {
-                event.originalEvent.dataTransfer.setData('text/plain', card);
-            });
-
-            $('#deck').append(cardElement);
+        shuffledCards.slice(0, 5).forEach((card, index) => {
+            const cardElement = $('<img>')
+                .attr('src', `cards/${card}.jpg`)
+                .addClass('card')
+                .css({ top: `${index * 20}px`, left: `${index * 80}px` })
+                .draggable();
+            $('#cardArea').append(cardElement);
         });
-    }
-
-    // Deal cards when the "Deal" button is clicked
-    $('#deal-btn').on('click', function() {
-        dealCards();
     });
 
-    // Allow dropping on the discard pile
-    $('#discard-pile').on('dragover', function(event) {
-        event.preventDefault();
-    });
-
-    $('#discard-pile').on('drop', function(event) {
-        event.preventDefault();
-        const cardName = event.originalEvent.dataTransfer.getData('text/plain');
-        const cardElement = $(`img[src='cards/${cardName}']`);
-        cardElement.remove(); // Remove from deck
-
-        // Display message when a card is discarded
-        alert(`Card ${cardName} discarded!`);
+    // Make discard pile droppable
+    $('#discardPile').droppable({
+        accept: '.card',
+        drop: function (event, ui) {
+            ui.draggable.remove();  // Remove card once discarded
+            alert('Card discarded!');
+        }
     });
 });
