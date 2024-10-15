@@ -1,6 +1,6 @@
 $(document).ready(function () {
     const suits = ['S', 'C', 'H', 'D'];  // Spades, Clubs, Hearts, Diamonds
-    const cards = [];
+    let cards = [];
 
     // Create a deck of 52 cards
     suits.forEach(suit => {
@@ -17,12 +17,22 @@ $(document).ready(function () {
         return deck;
     }
 
+    // Shuffle the deck at the start
+    let shuffledCards = shuffleDeck([...cards]);
+
     // Deal cards when button is clicked
     $('#dealButton').on('click', function () {
-        const shuffledCards = shuffleDeck([...cards]);
-        $('#cardArea').empty();  // Clear previous cards
+        if (shuffledCards.length === 0) {
+            alert('No more cards to deal!');
+            return;
+        }
 
-        shuffledCards.slice(0, 5).forEach((card, index) => {
+        // Deal up to 5 cards or the remaining cards in the deck
+        const dealCount = Math.min(5, shuffledCards.length);
+        const cardsToDeal = shuffledCards.splice(0, dealCount);
+
+        // Display the dealt cards
+        cardsToDeal.forEach((card, index) => {
             const cardElement = $('<img>')
                 .attr('src', `cards/${card}.jpg`)
                 .addClass('card')
