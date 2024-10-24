@@ -23,15 +23,25 @@ function randomBounceAngle() {
 }
 
 function update() {
-    // Check for collision with boundaries
-    if (x + dx > canvas.width - size || x + dx < size) {
-        randomBounceAngle(); // Randomize direction on X boundary hit
-        dx = -dx; 
+    // Check for collision with boundaries and adjust accordingly
+    if (x + dx > canvas.width - size) {
+        x = canvas.width - size; // Ensure the ball stays within the right boundary
+        dx = -dx; // Reverse direction on X-axis
     }
-    if (y + dy > canvas.height - size || y + dy < size) {
-        randomBounceAngle(); // Randomize direction on Y boundary hit
-        dy = -dy;
+    if (x + dx < size) {
+        x = size; // Ensure the ball stays within the left boundary
+        dx = -dx; // Reverse direction on X-axis
     }
+    if (y + dy > canvas.height - size) {
+        y = canvas.height - size; // Ensure the ball stays within the bottom boundary
+        dy = -dy; // Reverse direction on Y-axis
+    }
+    if (y + dy < size) {
+        y = size; // Ensure the ball stays within the top boundary
+        dy = -dy; // Reverse direction on Y-axis
+    }
+
+    // Move the ball
     x += dx;
     y += dy;
     drawObject();
