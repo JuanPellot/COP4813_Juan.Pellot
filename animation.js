@@ -47,35 +47,10 @@ function update() {
     drawObject();
 }
 
-// Pre-defined path coordinates (example: a sine wave)
-let t = 0;
-function followPath() {
-    x = 250 + 100 * Math.cos(t); // Example circular path
-    y = 250 + 100 * Math.sin(t);
-    t += 0.05;
-    drawObject();
-}
-
-// Advanced effects on click
-canvas.addEventListener("click", function(event) {
-    const rect = canvas.getBoundingClientRect();
-    const clickX = event.clientX - rect.left;
-    const clickY = event.clientY - rect.top;
-
-    // Check if click is within object's bounds
-    const distance = Math.sqrt((clickX - x) ** 2 + (clickY - y) ** 2);
-    if (distance <= size) {
-        // Change color to random
-        color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-        
-        // Increase size temporarily (like an explosion)
-        let originalSize = size;
-        size = 40;
-        setTimeout(() => size = originalSize, 200);
-
-        // Randomize direction
-        randomBounceAngle();
-    }
+// Change bounce direction on any click inside the canvas
+canvas.addEventListener("click", function() {
+    randomBounceAngle();
+    color = `#${Math.floor(Math.random() * 16777215).toString(16)}`; // Change color on click
 });
 
 // Choose between free movement or path following
