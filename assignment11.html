@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Course Advisor Tool</title>
+  <title>Information Technology – BSIT, B.S. Degree Course Advisor Tool</title>
   <style>
     /* Global Styles */
     body {
@@ -31,6 +31,13 @@
       max-width: 1200px;
     }
 
+    .program-note {
+      font-style: italic;
+      color: #888;
+      margin: 10px;
+      text-align: center;
+    }
+
     /* Course Card Styling */
     .course {
       border: 2px solid #2c3e50;
@@ -54,7 +61,6 @@
       pointer-events: none;
     }
 
-    /* Color Tag for Course ID */
     .course-id {
       font-size: 1em;
       color: #fff;
@@ -67,7 +73,6 @@
       font-weight: bold;
     }
 
-    /* Course Title and Information */
     .course h2 {
       margin: 0;
       font-size: 1.2em;
@@ -85,85 +90,50 @@
       margin-top: 10px;
     }
 
-    /* Checkbox Styling */
     input[type="checkbox"] {
       margin-right: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>Course Advisor Tool</h1>
+  <h1>Information Technology – BSIT, B.S. Degree Course Advisor Tool</h1>
+  <p class="program-note">Note: Prior to enrollment in college-level English or math courses, some students may be advised to complete college preparatory/developmental course work. See an Academic Advisor to determine developmental course requirements.</p>
   <div id="courses"></div>
 
   <script>
-    // Expanded JSON data
     const courses = [
-      {
-        "course_id": "COP1000",
-        "name": "Introduction to Computer Science",
-        "description": "Basic computer science concepts and principles.",
-        "prerequisites": [],
-        "notes": "Foundation course for all CS majors."
-      },
-      {
-        "course_id": "COP2000",
-        "name": "Programming Fundamentals",
-        "description": "Basic programming skills using Python.",
-        "prerequisites": ["COP1000"],
-        "notes": "Requires Introduction to Computer Science."
-      },
-      {
-        "course_id": "COP2800",
-        "name": "Java Programming",
-        "description": "Introduction to Java programming and OOP.",
-        "prerequisites": ["COP2000"],
-        "notes": "Builds on Programming Fundamentals."
-      },
-      {
-        "course_id": "COP2001",
-        "name": "Intro to Programming",
-        "description": "Basic programming concepts using JavaScript.",
-        "prerequisites": [],
-        "notes": "Can be taken as an OR prerequisite for COP2800 or COP3003."
-      },
-      {
-        "course_id": "COP3003",
-        "name": "Intermediate Programming",
-        "description": "Intermediate programming with Java.",
-        "prerequisites": ["COP2800", "COP2001"],
-        "prerequisites_type": "OR",
-        "notes": "Select one prerequisite course."
-      },
-      {
-        "course_id": "COP3703",
-        "name": "Database Management",
-        "description": "Introduction to database systems and SQL.",
-        "prerequisites": ["COP2000"],
-        "notes": "Requires Programming Fundamentals."
-      },
-      {
-        "course_id": "CEN4010",
-        "name": "Software Engineering",
-        "description": "Principles of software development and engineering.",
-        "prerequisites": ["COP3003", "COP3703"],
-        "prerequisites_type": "AND",
-        "notes": "Requires both Intermediate Programming and Database Management."
-      }
+      { "course_id": "COP3530", "name": "Data Structures", "description": "Study of data organization and manipulation.", "prerequisites": [] },
+      { "course_id": "COP4610", "name": "Operating Systems", "description": "Introduction to operating systems principles.", "prerequisites": [] },
+      { "course_id": "CNT3104", "name": "Introduction to Telecommunications", "description": "Basics of telecommunications.", "prerequisites": [] },
+      { "course_id": "CIS4250", "name": "Ethical Issues in IT", "description": "Exploration of ethics in information technology.", "prerequisites": [] },
+      { "course_id": "CNT4007", "name": "Data and Computer Communications", "description": "Fundamentals of data communication.", "prerequisites": ["CNT3104"] },
+      { "course_id": "CIS4360", "name": "Applied Cybersecurity", "description": "Introduction to cybersecurity practices.", "prerequisites": [] },
+      { "course_id": "COP4813", "name": "Web Systems I", "description": "Introduction to web development.", "prerequisites": [] },
+      { "course_id": "CDA4101", "name": "Computer Organization and Design", "description": "Fundamentals of computer architecture.", "prerequisites": [] },
+      { "course_id": "CNT4703", "name": "Voice and Data Network Design", "description": "Design of voice and data networks.", "prerequisites": ["CNT4007"] },
+      { "course_id": "COP4708", "name": "Applied Database I", "description": "Introduction to database concepts.", "prerequisites": [] },
+      { "course_id": "CEN4010", "name": "Software Engineering", "description": "Study of software development practices.", "prerequisites": ["COP4708"] },
+      { "course_id": "CEN4801", "name": "Systems Integration", "description": "Integration of software systems.", "prerequisites": ["CEN4010"] },
+      { "course_id": "CEN3722", "name": "Human Computer Interfaces", "description": "Introduction to user interfaces.", "prerequisites": [] },
+      { "course_id": "CIS4510", "name": "IT Project Management", "description": "Principles of project management in IT.", "prerequisites": [] },
+      { "course_id": "GEB3213", "name": "Business Writing", "description": "Technical writing skills for business.", "prerequisites": [], "notes": "Alternate: ENC2210 also satisfies this requirement." },
+      { "course_id": "COP4709", "name": "Applied Database II", "description": "Advanced database management concepts.", "prerequisites": ["COP4708"], "specialization": "Web Systems Programming" },
+      { "course_id": "COP4834", "name": "Web Systems II", "description": "Advanced web development.", "prerequisites": ["COP4813"], "specialization": "Web Systems Programming" },
+      { "course_id": "CET4860", "name": "Introduction to Digital Forensics", "description": "Basic digital forensics skills.", "prerequisites": [], "specialization": "Cybersecurity and Cyberforensics" },
+      { "course_id": "CET4861", "name": "Advanced Digital Forensics", "description": "Advanced techniques in digital forensics.", "prerequisites": ["CET4860"], "specialization": "Cybersecurity and Cyberforensics" },
+      { "course_id": "CET4862", "name": "Network Forensics and Incident Response", "description": "Incident response in network environments.", "prerequisites": ["CIS4360"], "specialization": "Cybersecurity and Cyberforensics" }
     ];
 
-    // Dynamically create course elements
     function createCourseElements() {
       courses.forEach(course => {
         const courseElement = document.createElement('div');
         courseElement.classList.add('course');
         courseElement.id = course.course_id;
 
-        // Course ID Tag
         const courseIdTag = document.createElement('span');
         courseIdTag.classList.add('course-id');
         courseIdTag.textContent = course.course_id;
 
-        // Add checkbox to mark course as completed
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.id = `completed-${course.course_id}`;
@@ -178,43 +148,33 @@
 
         const notes = document.createElement('p');
         notes.classList.add('notes');
-        notes.textContent = course.notes;
+        notes.textContent = course.notes || "";
 
-        // Append elements
         courseElement.appendChild(courseIdTag);
         courseElement.appendChild(checkbox);
         courseElement.appendChild(label);
         courseElement.appendChild(description);
-        courseElement.appendChild(notes);
+        if (course.notes) courseElement.appendChild(notes);
         document.getElementById('courses').appendChild(courseElement);
       });
     }
 
-    // Update availability based on prerequisites
     function updateCourseAvailability() {
       courses.forEach(course => {
         const courseElement = document.getElementById(course.course_id);
         const isCompleted = document.getElementById(`completed-${course.course_id}`).checked;
 
         let prereqsMet = true;
-
-        // Check if prerequisites are met
-        if (course.prerequisites_type === "OR") {
-          prereqsMet = course.prerequisites.some(prereqId =>
-            document.getElementById(`completed-${prereqId}`)?.checked
-          );
-        } else {
+        if (course.prerequisites) {
           prereqsMet = course.prerequisites.every(prereqId =>
             document.getElementById(`completed-${prereqId}`)?.checked
           );
         }
 
-        // Disable course if prerequisites are unmet and course isn't completed
         courseElement.classList.toggle('disabled', !isCompleted && !prereqsMet);
       });
     }
 
-    // Initialize the interface
     createCourseElements();
   </script>
 </body>
