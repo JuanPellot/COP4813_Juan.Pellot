@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Advisor Tool</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #courses {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    /* Course Card Styling */
+    .course {
+      border: 2px solid #2c3e50;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .course:hover {
+      transform: scale(1.03);
+    }
+
+    .course.disabled {
+      background-color: #f0f0f0;
+      color: #999;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    /* Color Tag for Course ID */
+    .course-id {
+      font-size: 1em;
+      color: #fff;
+      background-color: #3498db;
+      padding: 5px 10px;
+      border-radius: 4px;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-weight: bold;
+    }
+
+    /* Course Title and Information */
+    .course h2 {
+      margin: 0;
+      font-size: 1.2em;
+      color: #2c3e50;
+    }
+
+    .course p {
+      margin: 10px 0;
+      color: #555;
+    }
+
+    .course .notes {
+      font-style: italic;
+      color: #888;
+      margin-top: 10px;
+    }
+
+    /* Checkbox Styling */
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Course Advisor Tool</h1>
+  <div id="courses"></div>
+
+  <script>
+    // Expanded JSON data
+    const courses = [
+      {
+        "course_id": "COP1000",
+        "name": "Introduction to Computer Science",
+        "description": "Basic computer science concepts and principles.",
+        "prerequisites": [],
+        "notes": "Foundation course for all CS majors."
+      },
+      {
+        "course_id": "COP2000",
+        "name": "Programming Fundamentals",
+        "description": "Basic programming skills using Python.",
+        "prerequisites": ["COP1000"],
+        "notes": "Requires Introduction to Computer Science."
+      },
+      {
+        "course_id": "COP2800",
+        "name": "Java Programming",
+        "description": "Introduction to Java programming and OOP.",
+        "prerequisites": ["COP2000"],
+        "notes": "Builds on Programming Fundamentals."
+      },
+      {
+        "course_id": "COP2001",
+        "name": "Intro to Programming",
+        "description": "Basic programming concepts using JavaScript.",
+        "prerequisites": [],
+        "notes": "Can be taken as an OR prerequisite for COP2800 or COP3003."
+      },
+      {
+        "course_id": "COP3003",
+        "name": "Intermediate Programming",
+        "description": "Intermediate programming with Java.",
+        "prerequisites": ["COP2800", "COP2001"],
+        "prerequisites_type": "OR",
+        "notes": "Select one prerequisite course."
+      },
+      {
+        "course_id": "COP3703",
+        "name": "Database Management",
+        "description": "Introduction to database systems and SQL.",
+        "prerequisites": ["COP2000"],
+        "notes": "Requires Programming Fundamentals."
+      },
+      {
+        "course_id": "CEN4010",
+        "name": "Software Engineering",
+        "description": "Principles of software development and engineering.",
+        "prerequisites": ["COP3003", "COP3703"],
+        "prerequisites_type": "AND",
+        "notes": "Requires both Intermediate Programming and Database Management."
+      }
+    ];
+
+    // Dynamically create course elements
+    function createCourseElements() {
+      courses.forEach(course => {
+        const courseElement = document.createElement('div');
+        courseElement.classList.add('course');
+        courseElement.id = course.course_id;
+
+        // Course ID Tag
+        const courseIdTag = document.createElement('span');
+        courseIdTag.classList.add('course-id');
+        courseIdTag.textContent = course.course_id;
+
+        // Add checkbox to mark course as completed
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `completed-${course.course_id}`;
+        checkbox.addEventListener('change', updateCourseAvailability);
+
+        const label = document.createElement('label');
+        label.setAttribute('for', `completed-${course.course_id}`);
+        label.textContent = `${course.name}`;
+
+        const description = document.createElement('p');
+        description.textContent = course.description;
+
+        const notes = document.createElement('p');
+        notes.classList.add('notes');
+        notes.textContent = course.notes;
+
+        // Append elements
+        courseElement.appendChild(courseIdTag);
+        courseElement.appendChild(checkbox);
+        courseElement.appendChild(label);
+        courseElement.appendChild(description);
+        courseElement.appendChild(notes);
+        document.getElementById('courses').appendChild(courseElement);
+      });
+    }
+
+    // Update availability based on prerequisites
+    function updateCourseAvailability() {
+      courses.forEach(course => {
+        const courseElement = document.getElementById(course.course_id);
+        const isCompleted = document.getElementById(`completed-${course.course_id}`).checked;
+
+        let prereqsMet = true;
+
+        // Check if prerequisites are met
+        if (course.prerequisites_type === "OR") {
+          prereqsMet = course.prerequisites.some(prereqId =>
+            document.getElementById(`completed-${prereqId}`)?.checked
+          );
+        } else {
+          prereqsMet = course.prerequisites.every(prereqId =>
+            document.getElementById(`completed-${prereqId}`)?.checked
+          );
+        }
+
+        // Disable course if prerequisites are unmet and course isn't completed
+        courseElement.classList.toggle('disabled', !isCompleted && !prereqsMet);
+      });
+    }
+
+    // Initialize the interface
+    createCourseElements();
+  </script>
+</body>
+</html>
