@@ -38,5 +38,5 @@
         "capabilities": ["Drag-and-drop builder, app integration"],
         "limitations": ["Limited scalability, cannot export sites"],
         "example": "https://www.wix.com/"
-    },
+    }
 ]
