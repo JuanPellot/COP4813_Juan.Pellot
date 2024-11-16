@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Comparison</title>
+    <link rel="stylesheet" href="styles12.css">
+</head>
+<body>
+    <h1>Content Management Systems Comparison</h1>
+    <table id="cms-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Support</th>
+                <th>Technology</th>
+                <th>Capabilities</th>
+                <th>Limitations</th>
+                <th>Example Site</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.getJSON("cms_data.json", function (data) {
+                var cmsTable = $("#cms-table tbody");
+                data.forEach(function (cms) {
+                    cmsTable.append(`
+                        <tr>
+                            <td>${cms.name}</td>
+                            <td>${cms.support}</td>
+                            <td>${cms.technology}</td>
+                            <td>${cms.capabilities.join(", ")}</td>
+                            <td>${cms.limitations.join(", ")}</td>
+                            <td><a href="${cms.example}" target="_blank">${cms.example}</a></td>
+                        </tr>
+                    `);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

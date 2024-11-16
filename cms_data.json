@@ -1,0 +1,42 @@
+[
+    {
+        "name": "WordPress",
+        "support": "Open Source",
+        "technology": "PHP/MySQL",
+        "capabilities": ["Supports themes", "Supports plugins", "Public API"],
+        "limitations": ["Security vulnerabilities with plugins", "Requires frequent updates"],
+        "example": "https://wordpress.org/"
+    },
+    {
+        "name": "Joomla",
+        "support": "Open Source",
+        "technology": "PHP/MySQL",
+        "capabilities": ["Supports multi-language sites", "Extensive permissions system"],
+        "limitations": ["Steeper learning curve, requires more technical knowledge"],
+        "example": "https://www.joomla.org/"
+    },
+    {
+        "name": "Drupal",
+        "support": "Open Source",
+        "technology": "PHP/MySQL",
+        "capabilities": ["Customizable, secure, flexible user permissions"],
+        "limitations": ["Steeper learning curve", "Less flexibility in design"],
+        "example": "https://www.drupal.org/"
+    },
+	{
+        "name": "Squarespace",
+        "support": "Proprietary, company-supported",
+        "technology": "JavaScript, server-side rendering",
+        "capabilities": ["Built-in templates, hosting included"],
+        "limitations": ["Limited customization, costly"],
+        "example": "https://www.squarespace.com/"
+    },
+	{
+        "name": "Wix",
+        "support": "Proprietary, company-supported",
+        "technology": "JavaScript, server-side rendering",
+        "capabilities": ["Drag-and-drop builder, app integration"],
+        "limitations": ["Limited scalability, cannot export sites"],
+        "example": "https://www.wix.com/"
+    },
+]
